@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KeWe Demo</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+               background: #0d1117; color: #c9d1d9; padding: 2rem; }
+        .container { max-width: 900px; margin: 0 auto; }
+        h1 { color: #58a6ff; margin-bottom: 0.5rem; }
+        h2 { color: #8b949e; font-weight: 400; margin-bottom: 2rem; }
+        .card { background: #161b22; border: 1px solid #30363d; border-radius: 8px;
+                padding: 1.5rem; margin-bottom: 1.5rem; }
+        .card h3 { color: #f0f6fc; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem; }
+        .method { display: inline-block; padding: 2px 8px; border-radius: 4px;
+                  font-size: 0.75rem; font-weight: 600; }
+        .get { background: #1f6feb33; color: #58a6ff; }
+        .post { background: #23863633; color: #3fb950; }
+        .put { background: #d2992233; color: #d29922; }
+        .delete { background: #da363333; color: #f85149; }
+        code { background: #0d1117; padding: 2px 6px; border-radius: 3px; font-size: 0.85rem; color: #f0f6fc; }
+        pre { background: #0d1117; padding: 1rem; border-radius: 6px; overflow-x: auto; margin: 0.5rem 0; }
+        .ws { color: #bc8cff; }
+        a { color: #58a6ff; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        #chat-box { background: #0d1117; border-radius: 6px; height: 200px; overflow-y: auto;
+                    padding: 1rem; margin-bottom: 0.5rem; font-family: monospace; font-size: 0.85rem; }
+        #chat-input { display: flex; gap: 0.5rem; }
+        #chat-input input { flex: 1; background: #0d1117; border: 1px solid #30363d; color: #c9d1d9;
+                            padding: 0.5rem 0.75rem; border-radius: 6px; }
+        #chat-input button { background: #238636; color: white; border: none; padding: 0.5rem 1rem;
+                             border-radius: 6px; cursor: pointer; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>KeWe Framework Demo</h1>
+    <h2>A fast, modern Python async web framework</h2>
+
+    <div class="card">
+        <h3>API Endpoints</h3>
+        <pre>
+<span class="method get">GET</span>    /api/users              — List all users
+<span class="method get">GET</span>    /api/users/{id}         — Get user by ID
+<span class="method post">POST</span>   /api/users              — Create user
+<span class="method put">PUT</span>    /api/users/{id}         — Update user
+<span class="method delete">DELETE</span> /api/users/{id}         — Delete user
+
+<span class="method get">GET</span>    /api/products           — List products (?category=&min_price=&in_stock_only=&page=&per_page=)
+<span class="method post">POST</span>   /api/products           — Create product
+
+<span class="method post">POST</span>   /api/auth/login         — Login ({"username": "admin", "password": "demo123"})
+<span class="method get">GET</span>    /api/auth/me            — Protected user info (Bearer token)
+<span class="method get">GET</span>    /api/auth/status        — Auth service status
+
+<span class="method get">GET</span>    /api/health             — Health check
+<span class="method get">GET</span>    /api/docs               — OpenAPI Swagger UI
+<span class="method get">GET</span>    /api/stream             — SSE streaming demo
+<span class="method get">GET</span>    /api/bg-task            — Background task demo
+<span class="ws">WS</span>     /ws/chat                — WebSocket Chat
+        </pre>
+    </div>
+
+    <div class="card">
+        <h3>WebSocket Chat</h3>
+        <div id="chat-box"></div>
+        <div id="chat-input">
+            <input type="text" id="msg" placeholder="Type a message..." />
+            <button onclick="send()">Send</button>
+        </div>
+    </div>
+
+    <div class="card">
+        <h3>Quick Links</h3>
+        <p><a href="/api/health">/api/health</a> — Health Check</p>
+        <p><a href="/api/docs">/api/docs</a> — Swagger UI</p>
+        <p><a href="/api/users">/api/users</a> — Users API</p>
+        <p><a href="/api/products">/api/products</a> — Products API</p>
+        <p><a href="/api/stream">/api/stream</a> — SSE Stream</p>
+    </div>
+</div>
+
+<script>
+// WebSocket chat
+const chatBox = document.getElementById('chat-box');
+const ws = new WebSocket(`ws://${location.host}/ws/chat`);
+
+ws.onmessage = (e) => {
+    const msg = JSON.parse(e.data);
+    const div = document.createElement('div');
+    div.textContent = msg.type === 'message' ? msg.data.text : msg.message;
+    chatBox.appendChild(div);
+    chatBox.scrollTop = chatBox.scrollHeight;
+};
+
+function send() {
+    const input = document.getElementById('msg');
+    ws.send(JSON.stringify({text: input.value}));
+    input.value = '';
+}
+</script>
+</body>
+</html>

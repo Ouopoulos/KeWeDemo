@@ -1,0 +1,29 @@
+# Virtual environment
+.venv/
+.venv*/
+venv/
+__pycache__/
+*.pyc
+
+# Distribution
+dist/
+*.egg-info/
+
+# IDE
+.idea/
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Env
+.env
+
+# Keys
+conf/*.pem
+*.pem
+*.key
+
+# Claude
+.claude/

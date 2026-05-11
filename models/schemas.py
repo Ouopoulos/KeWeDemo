@@ -1,9 +1,11 @@
-"""Data models for the demo — pure Python dataclasses (no Pydantic needed)."""
+"""Data models for the demo — pure Python dataclasses + Pydantic models for validation."""
 
 from dataclasses import dataclass, field
 from typing import Optional
+from pydantic import BaseModel, Field, EmailStr, field_validator
 
 
+# ---- Dataclass Models (used by in-memory DB) ----
 @dataclass
 class User:
     id: int
@@ -41,6 +43,41 @@ class TaskResult:
     message: str
 
 
+# ---- Pydantic Validation Models ----
+class UserCreateModel(BaseModel):
+    username: str = Field(min_length=2, max_length=50)
+    email: str = Field(min_length=5, max_length=100)
+    role: str = Field(default="user", pattern=r"^(admin|moderator|user|guest)$")
+
+    @field_validator("email")
+    @classmethod
+    def validate_email(cls, v):
+        if "@" not in v:
+            raise ValueError("Invalid email format")
+        return v
+
+
+class UserUpdateModel(BaseModel):
+    username: Optional[str] = Field(default=None, min_length=2, max_length=50)
+    email: Optional[str] = Field(default=None, min_length=5, max_length=100)
+    role: Optional[str] = Field(default=None, pattern=r"^(admin|moderator|user|guest)$")
+    active: Optional[bool] = None
+
+
+class ProductCreateModel(BaseModel):
+    name: str = Field(min_length=1, max_length=100)
+    price: float = Field(gt=0)
+    category: str = Field(default="general", min_length=1, max_length=50)
+    in_stock: bool = True
+
+
+class PaginatedResponse(BaseModel):
+    items: list
+    total: int
+    page: int
+    per_page: int
+
+
 # In-memory "databases"
 users_db: dict[int, User] = {
     1: User(id=1, username="admin", email="admin@kewe.dev", role="admin"),
@@ -53,3 +90,6 @@ products_db: dict[int, Product] = {
     2: Product(id=2, name="Gadget X", price=49.99, category="electronics"),
     3: Product(id=3, name="SuperGlue 5000", price=9.99, category="supplies"),
 }
+
+# File upload storage
+uploads_store: dict[str, dict] = {}

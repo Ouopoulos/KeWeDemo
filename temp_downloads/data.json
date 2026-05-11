@@ -1,0 +1,12 @@
+{
+  "framework": "KeWe",
+  "version": "1.0.4",
+  "features": [
+    "async",
+    "routing",
+    "middleware",
+    "websocket",
+    "caching"
+  ],
+  "demo_generated": true
+}

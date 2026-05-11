@@ -33,7 +33,7 @@ async def me(request: Request):
     payload = verify_token(token)
     if payload is None:
         raise Unauthorized("Invalid or expired token")
-    return json({"authenticated": True, "user_id": payload.get("user_id"), "username": payload.get("username")})
+    return json({"authenticated": True, "user_id": payload.get("user_id") or payload.get("sub"), "username": payload.get("username")})
 
 
 @auth_bp.get("/status")

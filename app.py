@@ -69,7 +69,9 @@ def create_app() -> Kewe:
     # ---- OpenAPI / Swagger ----
     openapi_plugin = OpenAPIPlugin()
     openapi_plugin.setup(app, title="KeWe Demo API", version="1.0.0",
-                         description="A complete KeWe framework demo")
+                         description="A complete KeWe framework demo",
+                         openapi_url="/api/openapi.json",
+                         swagger_ui_url="/api/docs")
 
     # ---- Health Checks ----
     health_endpoint = setup_health_checks(app, path="/health")
@@ -178,4 +180,4 @@ async def serve_static(request: Request, path: str):
 
 # ---- CLI Entry ----
 if __name__ == "__main__":
-    app.run(host=config.host, port=config.port, debug=config.debug)
+    app.run(host=config.host, port=config.port, debug=config.debug, motd=True)

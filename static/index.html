@@ -3,90 +3,188 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KeWe Demo</title>
+    <title>KeWe Framework Demo v1.0.0</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
                background: #0d1117; color: #c9d1d9; padding: 2rem; }
-        .container { max-width: 900px; margin: 0 auto; }
-        h1 { color: #58a6ff; margin-bottom: 0.5rem; }
-        h2 { color: #8b949e; font-weight: 400; margin-bottom: 2rem; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        h1 { color: #58a6ff; margin-bottom: 0.25rem; font-size: 1.5rem; }
+        h2 { color: #8b949e; font-weight: 400; margin-bottom: 1.5rem; font-size: 0.9rem; }
         .card { background: #161b22; border: 1px solid #30363d; border-radius: 8px;
-                padding: 1.5rem; margin-bottom: 1.5rem; }
-        .card h3 { color: #f0f6fc; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem; }
-        .method { display: inline-block; padding: 2px 8px; border-radius: 4px;
-                  font-size: 0.75rem; font-weight: 600; }
+                padding: 1.2rem; margin-bottom: 1rem; }
+        .card h3 { color: #f0f6fc; margin-bottom: 0.5rem; font-size: 0.95rem; }
+        .method { display: inline-block; padding: 1px 7px; border-radius: 3px;
+                  font-size: 0.7rem; font-weight: 600; min-width: 42px; text-align: center; }
         .get { background: #1f6feb33; color: #58a6ff; }
         .post { background: #23863633; color: #3fb950; }
         .put { background: #d2992233; color: #d29922; }
         .delete { background: #da363333; color: #f85149; }
-        code { background: #0d1117; padding: 2px 6px; border-radius: 3px; font-size: 0.85rem; color: #f0f6fc; }
-        pre { background: #0d1117; padding: 1rem; border-radius: 6px; overflow-x: auto; margin: 0.5rem 0; }
-        .ws { color: #bc8cff; }
+        .ws { background: #bc8cff33; color: #bc8cff; }
+        code { background: #0d1117; padding: 2px 6px; border-radius: 3px; font-size: 0.8rem; color: #f0f6fc; }
+        pre { background: #0d1117; padding: 0.75rem; border-radius: 6px; overflow-x: auto;
+              margin: 0.3rem 0; font-size: 0.78rem; line-height: 1.7; }
         a { color: #58a6ff; text-decoration: none; }
         a:hover { text-decoration: underline; }
-        #chat-box { background: #0d1117; border-radius: 6px; height: 200px; overflow-y: auto;
-                    padding: 1rem; margin-bottom: 0.5rem; font-family: monospace; font-size: 0.85rem; }
+        .badge { display: inline-block; padding: 1px 7px; border-radius: 10px; font-size: 0.65rem;
+                 background: #1f6feb33; color: #58a6ff; }
+        .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+        .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        @media (max-width: 1000px) { .grid { grid-template-columns: 1fr 1fr; } }
+        @media (max-width: 600px) { .grid, .grid2 { grid-template-columns: 1fr; } }
+        #chat-box { background: #0d1117; border-radius: 6px; height: 180px; overflow-y: auto;
+                    padding: 0.75rem; margin-bottom: 0.5rem; font-family: monospace; font-size: 0.8rem; }
         #chat-input { display: flex; gap: 0.5rem; }
         #chat-input input { flex: 1; background: #0d1117; border: 1px solid #30363d; color: #c9d1d9;
-                            padding: 0.5rem 0.75rem; border-radius: 6px; }
-        #chat-input button { background: #238636; color: white; border: none; padding: 0.5rem 1rem;
+                            padding: 0.4rem 0.6rem; border-radius: 6px; }
+        #chat-input button { background: #238636; color: white; border: none; padding: 0.4rem 0.8rem;
                              border-radius: 6px; cursor: pointer; }
+        .feature-tag { display: inline-block; padding: 2px 6px; border-radius: 4px; font-size: 0.68rem;
+                       background: #30363d; color: #8b949e; margin: 0 3px 3px 0; }
     </style>
 </head>
 <body>
 <div class="container">
-    <h1>KeWe Framework Demo</h1>
-    <h2>A fast, modern Python async web framework</h2>
+    <h1>KeWe Framework Demo v1.0.0</h1>
+    <h2>Async Python Web Framework — 14 Blueprints · 60+ Endpoints · 45+ Features</h2>
 
-    <div class="card">
-        <h3>API Endpoints</h3>
-        <pre>
-<span class="method get">GET</span>    /api/users              — List all users
-<span class="method get">GET</span>    /api/users/{id}         — Get user by ID
-<span class="method post">POST</span>   /api/users              — Create user
-<span class="method put">PUT</span>    /api/users/{id}         — Update user
-<span class="method delete">DELETE</span> /api/users/{id}         — Delete user
+    <div class="grid">
+        <div class="card">
+            <h3>CRUD APIs</h3>
+            <pre><span class="method get">GET</span> /api/users
+<span class="method get">GET</span> /api/users/{id}
+<span class="method post">POST</span> /api/users
+<span class="method put">PUT</span> /api/users/{id}
+<span class="method delete">DELETE</span> /api/users/{id}
+<span class="method get">GET</span> /api/products?category=&page=
+<span class="method post">POST</span> /api/products</pre>
+        </div>
+        <div class="card">
+            <h3>Auth & RBAC</h3>
+            <pre><span class="method post">POST</span> /api/auth/login
+<span class="method get">GET</span> /api/auth/me <span class="badge">JWT</span>
+<span class="method get">GET</span> /api/admin/dashboard
+<span class="method get">GET</span> /api/admin/users
+<span class="badge">roles</span> admin, moderator, user</pre>
+        </div>
+        <div class="card">
+            <h3>Caching</h3>
+            <pre><span class="method get">GET</span> /api/cache/status
+<span class="method get">GET</span> /api/cache/get/{key}
+<span class="method post">POST</span> /api/cache/set/{key}
+<span class="method delete">DELETE</span> /api/cache/delete/{key}
+<span class="method get">GET</span> /api/cache/advanced/status
+<span class="method get">GET</span> /api/cache/advanced/get/{key}
+<span class="method get">GET</span> /api/cache/advanced/bloom-filter</pre>
+        </div>
+        <div class="card">
+            <h3>Pydantic Validation</h3>
+            <pre><span class="method post">POST</span> /api/pydantic/users
+<span class="method put">PUT</span> /api/pydantic/users/{id}
+<span class="method post">POST</span> /api/pydantic/products</pre>
+        </div>
+        <div class="card">
+            <h3>Class-Based Views</h3>
+            <pre><span class="method get">GET</span> /api/views/products
+<span class="method post">POST</span> /api/views/products
+<span class="method put">PUT</span> /api/views/products/{id}
+<span class="method delete">DELETE</span> /api/views/products/{id}</pre>
+        </div>
+        <div class="card">
+            <h3>Forms & Sessions</h3>
+            <pre><span class="method post">POST</span> /api/forms/submit
+<span class="method post">POST</span> /api/forms/login
+<span class="method get">GET</span> /api/forms/cookie-counter
+<span class="method get">GET</span> /api/forms/signed-cookie
+<span class="method get">GET</span> /api/forms/session
+<span class="method get">GET</span> /api/forms/headers</pre>
+        </div>
+        <div class="card">
+            <h3>File Upload</h3>
+            <pre><span class="method post">POST</span> /api/upload/
+<span class="method get">GET</span> /api/upload/
+<span class="method get">GET</span> /api/upload/{id}</pre>
+        </div>
+        <div class="card">
+            <h3>Advanced Features</h3>
+            <pre><span class="method get">GET</span> /api/advanced/users?page=
+<span class="method get">GET</span> /api/advanced/products-cursor
+<span class="method post">POST</span> /api/advanced/hash-password
+<span class="method post">POST</span> /api/advanced/verify-password
+<span class="method get">GET</span> /api/advanced/files
+<span class="method get">GET</span> /api/advanced/download/{file}
+<span class="method get">GET</span> /api/advanced/i18n?lang=zh</pre>
+        </div>
+        <div class="card">
+            <h3>Rate Limiting</h3>
+            <pre><span class="method get">GET</span> /api/rate-test
+<span class="badge">limit</span> 5 requests / 10 seconds</pre>
+            <h3 style="margin-top:0.5rem">Circuit Breaker</h3>
+            <pre><span class="method get">GET</span> /api/circuit-breaker/status
+<span class="method get">GET</span> /api/circuit-breaker/call
+<span class="method post">POST</span> /api/circuit-breaker/reset</pre>
+        </div>
+        <div class="card">
+            <h3>Monitoring</h3>
+            <pre><span class="method get">GET</span> /api/monitoring/anomaly/status
+<span class="method post">POST</span> /api/monitoring/anomaly/simulate
+<span class="method post">POST</span> /api/monitoring/audit/log
+<span class="method get">GET</span> /api/monitoring/audit/logs
+<span class="method get">GET</span> /api/monitoring/live
+<span class="method get">GET</span> /api/monitoring/ready</pre>
+        </div>
+        <div class="card">
+            <h3>HTTP Client & Signals</h3>
+            <pre><span class="method get">GET</span> /api/http-client/
+<span class="method get">GET</span> /api/http-client/external/users
+<span class="method get">GET</span> /api/http-client/retry-demo
+<span class="method get">GET</span> /api/signals/events
+<span class="method get">GET</span> /api/signals/event-types
+<span class="method post">POST</span> /api/signals/trigger</pre>
+        </div>
+        <div class="card">
+            <h3>Infrastructure</h3>
+            <pre><span class="method get">GET</span> /api/health
+<span class="method get">GET</span> /api/system
+<span class="method get">GET</span> /metrics
+<span class="method get">GET</span> /api/docs
+<span class="method get">GET</span> /api/stream
+<span class="method get">GET</span> /api/bg-task
+<span class="method get">GET</span> /api/error-demo?type=404
+<span class="ws">WS</span> /ws/chat</pre>
+        </div>
 
-<span class="method get">GET</span>    /api/products           — List products (?category=&min_price=&in_stock_only=&page=&per_page=)
-<span class="method post">POST</span>   /api/products           — Create product
-
-<span class="method post">POST</span>   /api/auth/login         — Login ({"username": "admin", "password": "demo123"})
-<span class="method get">GET</span>    /api/auth/me            — Protected user info (Bearer token)
-<span class="method get">GET</span>    /api/auth/status        — Auth service status
-
-<span class="method get">GET</span>    /api/health             — Health check
-<span class="method get">GET</span>    /api/docs               — OpenAPI Swagger UI
-<span class="method get">GET</span>    /api/stream             — SSE streaming demo
-<span class="method get">GET</span>    /api/bg-task            — Background task demo
-<span class="ws">WS</span>     /ws/chat                — WebSocket Chat
-        </pre>
-    </div>
-
-    <div class="card">
-        <h3>WebSocket Chat</h3>
-        <div id="chat-box"></div>
-        <div id="chat-input">
-            <input type="text" id="msg" placeholder="Type a message..." />
-            <button onclick="send()">Send</button>
+        <div class="card">
+            <h3>WebSocket Chat</h3>
+            <div id="chat-box"></div>
+            <div id="chat-input">
+                <input type="text" id="msg" placeholder="Type a message..." />
+                <button onclick="send()">Send</button>
+            </div>
         </div>
     </div>
 
-    <div class="card">
-        <h3>Quick Links</h3>
-        <p><a href="/api/health">/api/health</a> — Health Check</p>
-        <p><a href="/api/docs">/api/docs</a> — Swagger UI</p>
-        <p><a href="/api/users">/api/users</a> — Users API</p>
-        <p><a href="/api/products">/api/products</a> — Products API</p>
-        <p><a href="/api/stream">/api/stream</a> — SSE Stream</p>
+    <div class="card" style="text-align:center">
+        <a href="/api/health">Health</a> ·
+        <a href="/api/system">System Status</a> ·
+        <a href="/api/docs">Swagger UI</a> ·
+        <a href="/metrics">Prometheus Metrics</a> ·
+        <a href="/api/users">Users API</a> ·
+        <a href="/api/cache/advanced/status">LFU Cache</a> ·
+        <a href="/api/signals/events">Signal Events</a> ·
+        <a href="/api/monitoring/live">Liveness</a>
+    </div>
+    <div class="card" style="font-size:0.75rem;color:#8b949e;text-align:center">
+        <b>Middleware:</b> TrustedHost → SecurityHeaders → Compression → CORS → Timing → RequestLogger → CSRF
+        &nbsp;·&nbsp;
+        <b>14 Blueprints</b> · 46 Framework Bugs Fixed · 998 Framework Tests
     </div>
 </div>
 
 <script>
-// WebSocket chat
 const chatBox = document.getElementById('chat-box');
-const ws = new WebSocket(`ws://${location.host}/ws/chat`);
-
+const protocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+const ws = new WebSocket(`${protocol}//${location.host}/ws/chat`);
 ws.onmessage = (e) => {
     const msg = JSON.parse(e.data);
     const div = document.createElement('div');
@@ -94,12 +192,22 @@ ws.onmessage = (e) => {
     chatBox.appendChild(div);
     chatBox.scrollTop = chatBox.scrollHeight;
 };
-
+ws.onerror = () => {
+    const div = document.createElement('div');
+    div.textContent = 'WebSocket not connected';
+    div.style.color = '#f85149';
+    chatBox.appendChild(div);
+};
 function send() {
     const input = document.getElementById('msg');
-    ws.send(JSON.stringify({text: input.value}));
-    input.value = '';
+    if (input.value.trim()) {
+        ws.send(JSON.stringify({text: input.value}));
+        input.value = '';
+    }
 }
+document.getElementById('msg').addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') send();
+});
 </script>
 </body>
 </html>

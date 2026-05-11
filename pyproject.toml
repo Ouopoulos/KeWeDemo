@@ -1,0 +1,19 @@
+[project]
+name = "kewedemo"
+version = "1.0.0"
+description = "KeWe Framework Demo Project - Showcasing KeWe framework capabilities"
+requires-python = ">=3.12"
+dependencies = [
+    "kewe[all]",
+    "pyodbc>=5.0.0",
+    "psycopg[binary]>=3.0.0",
+    "redis>=5.0.0",
+    "celery>=5.3.0",
+]
+
+[tool.uv.sources]
+kewe = { path = "../KeWe", editable = true }
+
+[tool.pytest.ini_options]
+testpaths = ["run_tests.py"]
+asyncio_mode = "auto"

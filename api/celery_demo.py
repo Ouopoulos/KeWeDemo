@@ -65,7 +65,7 @@ def email_notification_task(self, recipient: str, subject: str, body: str = ""):
 @celery_bp.get("/")
 async def celery_index():
     return json({
-        "broker": "Redis @ 192.168.18.137:6379",
+        "broker": "Redis @ 127.0.0.1:6379",
         "status": "connected",
         "endpoints": {
             "start_slow_task": "POST /api/celery/task/slow",

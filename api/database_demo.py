@@ -31,8 +31,8 @@ with pg_engine.connect() as conn:
 async def db_index():
     return json({
         "databases": {
-            "postgresql": "kiwi @ 192.168.18.137:5432",
-            "mssql": "BPMDATA_TARGET @ 192.168.18.137",
+            "postgresql": "kewe @ 127.0.0.1:5432",
+            "mssql": "data @ 127.0.0.1",
         },
         "endpoints": {
             "pg_status": "GET /api/database/pg/status",

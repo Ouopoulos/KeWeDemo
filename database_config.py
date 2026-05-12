@@ -2,18 +2,18 @@
 
 # MSSQL
 MSSQL_URL = (
-    "mssql+pyodbc://sa:nm123123.@192.168.18.137/BPMDATA_TARGET"
+    "mssql+pyodbc://sa:123123.@127.0.0.1/dat"
     "?driver=ODBC+Driver+17+for+SQL+Server"
 )
 
 # PostgreSQL
-POSTGRES_URL = "postgresql+psycopg://postgres:nm123123.@192.168.18.137:5432/kiwi"
+POSTGRES_URL = "postgresql+psycopg://postgres:123123.@127.0.0.1:5432/kewe"
 
 # Redis
 REDIS_CONFIG = {
-    "host": "192.168.18.137",
+    "host": "127.0.0.1",
     "port": 6379,
-    "password": "nm123123.",
+    "password": "123123.",
 }
 
 REDIS_URL = f"redis://:{REDIS_CONFIG['password']}@{REDIS_CONFIG['host']}:{REDIS_CONFIG['port']}/0"
